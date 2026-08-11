@@ -8,7 +8,7 @@ COPY BookStore.Application/BookStore.Application.csproj BookStore.Application/
 COPY BookStore.Domain/BookStore.Domain.csproj BookStore.Domain/
 COPY BookStore.Infrastructure/BookStore.Infrastructure.csproj BookStore.Infrastructure/
 
-RUN dotnet restore BookStore.slnx
+RUN dotnet restore BookStore.API/BookStore.API.csproj
 
 COPY . .
 
