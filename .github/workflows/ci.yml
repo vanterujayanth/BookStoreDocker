@@ -8,8 +8,12 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
-  build-and-test:
+  build-test-docker:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,10 +29,23 @@ jobs:
         run: dotnet restore BookStore.slnx
 
       - name: Build
-        run: dotnet build BookStore.slnx --configuration Release --no-restore
-        
-      - name: Run tests
-        run: dotnet test BookStore.slnx --configuration Release --no-build
+        run: dotnet build BookStore.slnx --no-restore --configuration Release
 
-      - name: Build Docker image
-        run: docker build -t bookstore-api:ci .
+      - name: Run tests
+        run: dotnet test BookStore.slnx --no-build --configuration Release
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/bookstore-api:latest
+            ghcr.io/${{ github.repository_owner }}/bookstore-api:${{ github.sha }}
