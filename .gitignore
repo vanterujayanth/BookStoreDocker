@@ -1,0 +1,30 @@
+
+# Environment variables and secrets
+
+.env
+.env.*
+
+# Visual Studio
+
+.vs/
+*.user
+*.suo
+
+# .NET build output
+
+bin/
+obj/
+
+# Test results
+
+TestResults/
+*.trx
+
+# Docker
+
+docker-compose.override.yml
+
+# OS files
+
+.DS_Store
+Thumbs.db

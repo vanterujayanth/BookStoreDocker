@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".dockerignore" />
+    <File Path=".env" />
+    <File Path=".gitignore" />
+    <File Path="docker-compose.yml" />
+    <File Path="Dockerfile" />
+  </Folder>
+  <Project Path="BookStore.API/BookStore.API.csproj" />
+  <Project Path="BookStore.Application/BookStore.Application.csproj" />
+  <Project Path="BookStore.Domain/BookStore.Domain.csproj" />
+  <Project Path="BookStore.Infrastructure/BookStore.Infrastructure.csproj" />
+</Solution>
