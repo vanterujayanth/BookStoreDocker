@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,6 +26,9 @@ jobs:
 
       - name: Build
         run: dotnet build BookStore.slnx --configuration Release --no-restore
+        
+      - name: Run tests
+        run: dotnet test BookStore.slnx --configuration Release --no-build
 
       - name: Build Docker image
         run: docker build -t bookstore-api:ci .
