@@ -64,7 +64,11 @@ builder.Services.AddDbContext<BookStoreDbContext>(options => options.UseNpgsql(b
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<IBookService, BookService>();
 var app = builder.Build();
-
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<BookStoreDbContext>();
+    db.Database.Migrate();
+}
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
